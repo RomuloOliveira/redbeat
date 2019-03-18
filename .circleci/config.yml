@@ -1,0 +1,20 @@
+version: 2
+jobs:
+  toxify:
+      docker:
+        - image: python:3.6
+        - image: redis:3.2.8
+      steps:
+        - checkout
+        - run:
+            name: Install tox
+            command: pip install tox
+        - run:
+            name: Run tests
+            command: tox
+
+workflows:
+  version: 2
+  tox_tests:
+    jobs:
+      - toxify
